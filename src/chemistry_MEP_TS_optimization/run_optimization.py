@@ -29,8 +29,6 @@ def run_opt(args, config, path_config, logger):
         add_translation_dof=args.add_translation_dof
     )
 
-    print('1')
-
     # Minimize initial points with the given potential
     if args.minimize_end_points:
         minima_finder = optimization.MinimaUpdate(potential)
@@ -52,7 +50,6 @@ def run_opt(args, config, path_config, logger):
         **path_config.path_params
     )
 
-    print('2')
     # Randomly initialize the path, otherwise a straight line
     if args.randomly_initialize_path is not None:
         path = optimization.randomly_initialize_path(
@@ -80,7 +77,6 @@ def run_opt(args, config, path_config, logger):
         config_tag=config.optimizer_config_tag
     )
 
-    print('3')
     # Loss
     #print(config.loss_functions)
     #loss_grad_fxn, loss_fxn = optimization.get_loss(config.loss_functions)
@@ -109,7 +105,6 @@ def run_opt(args, config, path_config, logger):
             )
 
     print("EVAL TIME", (timer.time()-t0)/60)
-    print('4', path_integral)
     # Plot gif animation of the MEP optimization (only for 2d potentials)
     if args.make_animation:
         geo_paths = potential.point_transform(torch.tensor(geo_paths))
@@ -121,7 +116,6 @@ def run_opt(args, config, path_config, logger):
             add_translation_dof=args.add_translation_dof,
             add_azimuthal_dof=args.add_azimuthal_dof
         )
-    print('5', path_integral)
     return path_integral
 
 
